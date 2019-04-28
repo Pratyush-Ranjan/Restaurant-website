@@ -1,0 +1,33 @@
+<div class="row">
+<div class="col-md-4"></div>
+<div class="col-md-4">
+  <ul class="list-group"> 
+  <li class="list-group-item" ng-repeat="items in existuser.cart.itemsArray">
+  <span style="font-weight:bold">{{items.item.title}}</span>
+   &ensp;
+  <span class="badge badge-success">${{items.price}}</span>   
+   &ensp;&ensp;
+      
+  <div class="btn-group">
+  <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Change
+  </button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item" href="" ng-click="reduceItem(items.item._id)">Reduce by 1</a>
+    <a class="dropdown-item" href="" ng-click="removeItem(items.item._id)">Remove all</a>
+  </div>
+  </div>
+    
+    <span style="float:right" class="badge badge-secondary badge-pill">{{items.qty}}</span> 
+  </li> 
+  </ul>
+    <br>
+    <h5>Total Amount: ${{existuser.cart.totalPrice}}</h5> 
+    <hr>
+    <a href="#/checkout" type="button" class="btn btn-success">Checkout</a>
+    <div ng-if="existuser.cart.itemsArray==[]">
+    <h4 align="center">No items in cart</h4>
+    </div>
+
+    
+</div>

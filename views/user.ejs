@@ -1,0 +1,99 @@
+<style>
+  @media screen and (max-width: 1100px)
+  {
+    .v1
+    {
+      display: none;
+    }
+  }
+</style>
+<div class="row">
+<div class="jumbotron col-md-6">
+<h3 style=" text-align: center;"> LOG IN </h3>
+<br>
+<form class="form-horizontal" ng-submit="logIn(user)">
+<div ng-show='errorlogin' class='alert alert-danger' role="alert">
+<span class="glyphicon glyphicon-exclamation-sign"></span>
+            {{ errorlogin }}
+            </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Username</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" ng-model="user.username" placeholder="Username" required>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Password</label>
+    <div class="col-sm-10">
+      <input type="password" class="form-control" ng-model="user.password" placeholder="Password" required>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox"> Remember me
+        </label>
+      </div>
+    </div>
+  </div>
+   <br><br><p><br></p>
+  <div class="form-group" style=" text-align: center;">
+    <div class="col-sm-12 ">
+      <button type="submit" class="btn btn-primary">Sign In</button>
+    </div>
+  </div>
+</form>
+</div>
+<div class="v1" style="
+    border-left: 3px dotted grey;
+    height: 445px;
+    position: absolute;
+    left: 50%;
+    margin-left: -3px;
+    top: 720px;
+"></div>
+<div class=" jumbotron col-md-6">
+<h3 style=" text-align: center;"> REGISTER </h3>
+<br>
+<form class="form-horizontal" ng-submit="register()" >
+<div class="alert alert-danger" role="alert" ng-show="er">
+      <span class="glyphicon glyphicon-exclamation-sign"></span>
+         {{ er }}
+    </div>
+    <div class="form-group">
+    <label class="col-sm-2 control-label">Username</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" ng-model="user.rusername" placeholder="Username" required>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Password</label>
+    <div class="col-sm-10">
+      <input type="password" class="form-control" ng-model="user.rpassword" placeholder="Password" required>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Retype-Password</label>
+    <div class="col-sm-10">
+      <input type="password" class="form-control" ng-model="user.rrpassword" placeholder="Password" required>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox"> Remember me
+        </label>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="form-group" style=" text-align: center;">
+    <div class="col-sm-12">
+      <button type="submit" class="btn btn-primary" >Sign Up</button>
+    </div>
+  </div>
+</form>
+</div>
+</div>

@@ -1,0 +1,12 @@
+<br>
+<div class="col-sm-6 col-md-3 hov-img-zoom" ng-repeat="product in products | orderBy:'-price'" style="float: left;">
+  <img style="padding:10px" height="300px" class="card-img-top" src={{product.imgurl}}>
+  <h5>{{product.title}}</h5>
+    <p style="color:#696969" class="card-text">{{product.type}}</p>
+    <span style="font-size:25px;font-weight:bold">${{product.price}}</span>    
+  <form ng-submit="addtocart(product)" enctype="multipart/form-data">
+  <div class="form-group">
+      <button style="float:right" type="submit" class="btn btn-success " style="cursor:pointer">Add to cart</button>
+  </div>
+  </form>
+</div>

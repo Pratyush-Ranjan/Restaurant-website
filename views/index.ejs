@@ -33,6 +33,8 @@
 <script type="text/javascript" src="./public/javascripts/angular.min.js"></script>
    <script type="text/javascript" src="./public/javascripts/angular-route.min.js"></script>
 <script type="text/javascript" src="./public/javascripts/angularapp.js"></script>
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+<script type="text/javascript" src="javascript/checkout.js"></script>
 <!--===============================================================================================-->
 </head>
 <body class="animsition" ng-controller="restcontrol">
@@ -59,13 +61,8 @@
                 </li>
 
                 <li>
-                  <a href="menu.html">Menu</a>
+                  <a href="#/user">Food Order</a>
                 </li>
-
-                <li>
-                  <a href="reservation.html">Reservation</a>
-                </li>
-
                 <li>
                   <a href="#/gallery">Gallery</a>
                 </li>
@@ -76,6 +73,12 @@
 
                 <li>
                   <a href="#/contact">Contact</a>
+                </li>
+                <li ng-show="currentUser">
+                  <a href="#/cart">Cart</a>
+                </li>
+                <li ng-show="currentUser">
+                  <a href="" ng-click="logout()">Logout</a>
                 </li>
               </ul>
             </nav>
@@ -103,11 +106,6 @@
       <li class="t-center m-b-13">
         <a href="#/" class="txt19">Home</a>
       </li>
-
-      <li class="t-center m-b-13">
-        <a href="menu.html" class="txt19">Menu</a>
-      </li>
-
       <li class="t-center m-b-13">
         <a href="#/gallery" class="txt19">Gallery</a>
       </li>
@@ -122,8 +120,8 @@
 
       <li class="t-center">
         <!-- Button3 -->
-        <a href="reservation.html" class="btn3 flex-c-m size13 txt11 trans-0-4 m-l-r-auto">
-          Reservation
+        <a href="#/user" class="btn3 flex-c-m size13 txt11 trans-0-4 m-l-r-auto">
+          Food Order
         </a>
       </li>
     </ul>
@@ -191,7 +189,7 @@
 
             <div class="wrap-btn-slide1 animated visible-false" data-appear="zoomIn">
               <!-- Button1 -->
-              <a href="menu.html" class="btn1 flex-c-m size1 txt3 trans-0-4">
+              <a href="#/user" class="btn1 flex-c-m size1 txt3 trans-0-4">
                 Look Menu
               </a>
             </div>
@@ -210,7 +208,7 @@
 
             <div class="wrap-btn-slide1 animated visible-false" data-appear="slideInUp">
               <!-- Button1 -->
-              <a href="menu.html" class="btn1 flex-c-m size1 txt3 trans-0-4">
+              <a href="#/user" class="btn1 flex-c-m size1 txt3 trans-0-4">
                 Look Menu
               </a>
             </div>
@@ -229,7 +227,7 @@
 
             <div class="wrap-btn-slide1 animated visible-false" data-appear="rotateIn">
               <!-- Button1 -->
-              <a href="menu.html" class="btn1 flex-c-m size1 txt3 trans-0-4">
+              <a href="#/user" class="btn1 flex-c-m size1 txt3 trans-0-4">
                 Look Menu
               </a>
             </div>
@@ -241,123 +239,9 @@
       <div class="wrap-slick1-dots"></div>
     </div>
   </section>
-
   <div class="ng-view">
   </div>
-
-  <!-- Gallery -->
-  <div class="section-gallery p-t-118 p-b-100">
-    <div class="wrap-label-gallery filter-tope-group size27 flex-w flex-sb-m m-l-r-auto flex-col-c-sm p-l-15 p-r-15 m-b-60">
-      <button class="label-gallery txt26 trans-0-4 is-actived" data-filter="*">
-        All Photo
-      </button>
-
-      <button class="label-gallery txt26 trans-0-4" data-filter=".interior">
-        Interior
-      </button>
-
-      <button class="label-gallery txt26 trans-0-4" data-filter=".food">
-        Food
-      </button>
-
-      <button class="label-gallery txt26 trans-0-4" data-filter=".events">
-        Events
-      </button>
-
-      <button class="label-gallery txt26 trans-0-4" data-filter=".guests">
-        Vip guests
-      </button>
-    </div>
-
-    <div class="wrap-gallery isotope-grid flex-w p-l-25 p-r-25">
-      <!-- - -->
-      <div class="item-gallery isotope-item bo-rad-10 hov-img-zoom events guests">
-        <img src="./public/images/photo-gallery-13.jpg" alt="IMG-GALLERY">
-
-        <div class="overlay-item-gallery trans-0-4 flex-c-m">
-          <a class="btn-show-gallery flex-c-m fa fa-search" href="./public/images/photo-gallery-13.jpg" data-lightbox="gallery"></a>
-        </div>
-      </div>
-
-      <!-- - -->
-      <div class="item-gallery isotope-item bo-rad-10 hov-img-zoom food">
-        <img src="./public/images/photo-gallery-14.jpg" alt="IMG-GALLERY">
-
-        <div class="overlay-item-gallery trans-0-4 flex-c-m">
-          <a class="btn-show-gallery flex-c-m fa fa-search" href="./public/images/photo-gallery-14.jpg" data-lightbox="gallery"></a>
-        </div>
-      </div>
-
-      <!-- - -->
-      <div class="item-gallery isotope-item bo-rad-10 hov-img-zoom events">
-        <img src="./public/images/photo-gallery-15.jpg" alt="IMG-GALLERY">
-
-        <div class="overlay-item-gallery trans-0-4 flex-c-m">
-          <a class="btn-show-gallery flex-c-m fa fa-search" href="./public/images/photo-gallery-15.jpg" data-lightbox="gallery"></a>
-        </div>
-      </div>
-
-      <!-- - -->
-      <div class="item-gallery isotope-item bo-rad-10 hov-img-zoom food">
-        <img src="./public/images/photo-gallery-16.jpg" alt="IMG-GALLERY">
-
-        <div class="overlay-item-gallery trans-0-4 flex-c-m">
-          <a class="btn-show-gallery flex-c-m fa fa-search" href="./public/images/photo-gallery-16.jpg" data-lightbox="gallery"></a>
-        </div>
-      </div>
-
-      <!-- - -->
-      <div class="item-gallery isotope-item bo-rad-10 hov-img-zoom food">
-        <img src="./public/images/photo-gallery-17.jpg" alt="IMG-GALLERY">
-
-        <div class="overlay-item-gallery trans-0-4 flex-c-m">
-          <a class="btn-show-gallery flex-c-m fa fa-search" href="./public/images/photo-gallery-17.jpg" data-lightbox="gallery"></a>
-        </div>
-      </div>
-
-      <!-- - -->
-      <div class="item-gallery isotope-item bo-rad-10 hov-img-zoom interior guests">
-        <img src="./public/images/photo-gallery-18.jpg" alt="IMG-GALLERY">
-
-        <div class="overlay-item-gallery trans-0-4 flex-c-m">
-          <a class="btn-show-gallery flex-c-m fa fa-search" href="./public/images/photo-gallery-18.jpg" data-lightbox="gallery"></a>
-        </div>
-      </div>
-
-      <!-- - -->
-      <div class="item-gallery isotope-item bo-rad-10 hov-img-zoom interior">
-        <img src="./public/images/photo-gallery-19.jpg" alt="IMG-GALLERY">
-
-        <div class="overlay-item-gallery trans-0-4 flex-c-m">
-          <a class="btn-show-gallery flex-c-m fa fa-search" href="./public/images/photo-gallery-19.jpg" data-lightbox="gallery"></a>
-        </div>
-      </div>
-
-      <!-- - -->
-      <div class="item-gallery isotope-item bo-rad-10 hov-img-zoom interior">
-        <img src="./public/images/photo-gallery-20.jpg" alt="IMG-GALLERY">
-
-        <div class="overlay-item-gallery trans-0-4 flex-c-m">
-          <a class="btn-show-gallery flex-c-m fa fa-search" href="./public/images/photo-gallery-20.jpg" data-lightbox="gallery"></a>
-        </div>
-      </div>
-
-      <!-- - -->
-      <div class="item-gallery isotope-item bo-rad-10 hov-img-zoom events">
-        <img src="./public/images/photo-gallery-21.jpg" alt="IMG-GALLERY">
-
-        <div class="overlay-item-gallery trans-0-4 flex-c-m">
-          <a class="btn-show-gallery flex-c-m fa fa-search" href="./public/images/photo-gallery-21.jpg" data-lightbox="gallery"></a>
-        </div>
-      </div>
-    </div>
-
-    <div class="pagination flex-c-m flex-w p-l-15 p-r-15 m-t-24 m-b-50">
-      <a href="" class="item-pagination flex-c-m trans-0-4 active-pagination">1</a>
-      <a href="" class="item-pagination flex-c-m trans-0-4">2</a>
-      <a href="" class="item-pagination flex-c-m trans-0-4">3</a>
-    </div>
-  </div>
+  <br>
 
 <!-- Review -->
   <section class="section-review p-t-115">
@@ -579,7 +463,7 @@
           </div>
 
           <div class="txt17 p-r-20 p-t-5 p-b-5">
-            Copyright &copy; 2018 All rights reserved
+            Copyright &copy; 2018 All rights reserved-MasterPRS
           </div>
         </div>
       </div>
