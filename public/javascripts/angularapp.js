@@ -54,6 +54,7 @@ $routeProvider
 		resolve : ['auth',
 		function(auth) {
 			auth.checklogin();
+			auth.iscart();
 		}]
 	})
 	.when("/cart",{
@@ -74,6 +75,9 @@ $routeProvider
 			auth.checklogin();
 			auth.iscart();
 		}]
+	})
+	.when("/orders",{
+		templateUrl:"./views/orders.ejs"
 	})
 	.otherwise({
 		redirectTo: "/"
@@ -128,12 +132,14 @@ auth.checklogin = function() {
  	  if(response === '0')
  	  	$location.path("/menu");
  	});
- };  
+ }; 
 	return auth;
 }]);
-app.controller('restcontrol',['$scope','$location','$http','$rootScope',function($scope,$location,$http,$rootScope){
+app.controller('restcontrol',['$scope','$location','$http','$rootScope','$window',function($scope,$location,$http,$rootScope,$window){
 $scope.user={};
+$scope.payer={};
 $scope.products=[];
+$scope.orders=[];
 $scope.er='';
 $scope.errorlogin='';
 $scope.cart={};
@@ -175,9 +181,27 @@ $scope.logIn = function() {
         $location.path("/");
       });
   };
+  $scope.checkout = function() {
+    $http.post('/api/checkout/'+$rootScope.currentUser.username,$scope.payer)
+    .error(function(error) {
+			console.log('Error: ' + error);
+		})
+    .success(function(response) {
+ //   	$window.alert(response);
+        $window.location.href=response;
+      });
+  };
   $http.get('/api/products')
 		.success(function(data) {
 			$scope.products=data;
+		})
+		.error(function(data) {
+			console.log('Error: ' + data);
+		});
+
+ $http.get('/api/orders')
+		.success(function(data) {
+			$scope.orders=data;
 		})
 		.error(function(data) {
 			console.log('Error: ' + data);
