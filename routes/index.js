@@ -10,8 +10,8 @@ var Order= require('../models/order');
 var paypal = require('paypal-rest-sdk');
 paypal.configure({
   'mode': 'sandbox', //sandbox or live
-  'client_id': 'AR8rX29PrbNvjB95KUWBxnvOhxpWakfw2QqU88OVMcgFKrvH6bF9fJVv8itXfJXoSPj64mB7O3lxwmd1',
-  'client_secret': 'EJqj9bS6g9dMhRU2wJKiWdHHphg3HpRJV2oIuhL05sViNjSOvV6Z8mTxRvfzXIrmD86qTqf2pe7E5s-1'
+  'client_id': 'Client_id',
+  'client_secret': 'Client_secret'
 });
 
 /* GET home page. */
