@@ -1,0 +1,36 @@
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+<div class="col-md-8">
+<h3>Order List</h3>
+  <table> 
+  <tr>
+    <th>Name</th>
+    <th>Address</th>
+    <th>Contact</th>
+    <th>Amount</th>
+    <th>Items</th>
+  </tr>
+  <tr ng-repeat="ord in orders">
+    <td>{{ord.name}}</td>
+    <td>{{ord.address}}</td>
+    <td>{{ord.phone}}</td>
+    <td>{{ord.order.totalPrice}}</td>
+    <td>{{ord.itemsArray.item.title}}</td>
+  </tr>
+  </table>
+</div>
