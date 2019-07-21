@@ -7,7 +7,11 @@ var userSchema= mongoose.Schema({
 	 cart:{
         type: Object,
         default:null
-    }
+    },
+    orders:[{
+        type: Object,
+       default:null
+   }]
 },{usePushEach: true});
 userSchema.methods.generateHash = function(password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);

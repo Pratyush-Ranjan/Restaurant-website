@@ -38,7 +38,7 @@ module.exports=function Cart(oldCart){
         delete this.items[id];   
     }
     
-    this.add2= function(cart){
+   /* this.add2= function(cart){
       
         for(let id1 in cart.items){
             let count=0;
@@ -62,7 +62,7 @@ module.exports=function Cart(oldCart){
                 this.totalPrice += item.item.price * item.qty;
             }
         }
-    }
+    } */
     
     this.generateArray= () =>{
         var arr= [];
