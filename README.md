@@ -1,4 +1,4 @@
-# Restaurant-Booking
+# Restaurant-website
 
 ## Getting Started
 To test, contribute or just see what we did follow few easy steps:
