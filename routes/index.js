@@ -6,17 +6,52 @@ var Product= require('../models/product');
 var User= require('../models/user');
 var Cart= require('../models/cart');
 var Order= require('../models/order');
+var Tables=require('../models/tables');
 //paypal
 var paypal = require('paypal-rest-sdk');
 paypal.configure({
   'mode': 'sandbox', //sandbox or live
-  'client_id': 'Client_id',
-  'client_secret': 'Client_secret'
+  'client_id': 'AR8rX29PrbNvjB95KUWBxnvOhxpWakfw2QqU88OVMcgFKrvH6bF9fJVv8itXfJXoSPj64mB7O3lxwmd1',
+  'client_secret': 'EJqj9bS6g9dMhRU2wJKiWdHHphg3HpRJV2oIuhL05sViNjSOvV6Z8mTxRvfzXIrmD86qTqf2pe7E5s-1'
 });
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Pind-Balluchi' });
+});
+
+
+router.get('/api/tables', function(req, res, next) {
+  Tables.countDocuments(function(err,docs){
+    if (err)
+    res.send(err);
+  else
+    res.json(docs);
+  });
+});
+
+router.post('/api/reservetable', function(req,res,next) {
+Tables.create({
+    codename: req.body.codename,
+    name: req.body.name,
+    phone: req.body.contact
+  },function(err,docs){
+    if (err)
+    res.send(err);
+  else
+  res.json(docs);
+  }); 
+});
+
+router.post('/api/canceltable/:cname', function(req,res,next) {
+Tables.deleteOne({
+    codename: req.params.cname,
+  },function(err,docs){
+    if (err)
+    res.send(err);
+  else
+  res.json(docs);
+  }); 
 });
 
 router.get('/api/products', function(req, res, next) {
