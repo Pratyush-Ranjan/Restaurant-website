@@ -16,16 +16,34 @@ $routeProvider
 			auth.islogin();
 		}]
 	})
-	.when("/contact",{
-		templateUrl: "./views/contact.ejs",
+	.when("/reservation",{
+		templateUrl:"./views/reservation.ejs",
+		controller: "restcontrol",
+		resolve : ['auth',
+		function(auth) {
+			auth.counttable();
+			auth.islogin();
+		}]
+	})
+	.when("/reserve",{
+		templateUrl:"./views/reserve.ejs",
+		controller: "restcontrol",
+		resolve : ['auth',
+		function(auth) {
+			auth.notable();
+			auth.islogin();
+		}]
+	})
+	.when("/cancel",{
+		templateUrl:"./views/cancel.ejs",
 		controller: "restcontrol",
 		resolve : ['auth',
 		function(auth) {
 			auth.islogin();
 		}]
 	})
-	.when("/reservation",{
-		templateUrl: "./views/reservation.ejs",
+	.when("/contact",{
+		templateUrl: "./views/contact.ejs",
 		controller: "restcontrol",
 		resolve : ['auth',
 		function(auth) {
@@ -118,6 +136,21 @@ auth.checklogin = function() {
  		} 
  		});
  }; 
+ auth.counttable= function(){
+ 	$http.get('/api/tables')
+ 	.success(function(response)
+ 	{
+ 		$rootScope.tablescount=12-response;
+ 	});
+ };
+ auth.notable= function(){
+ 	$http.get('/api/tables')
+ 	.success(function(response)
+ 	{
+ 		if (response === '12') 
+ 	    $location.path("/reservation");	
+ 	});
+ };
  auth.iscart = function() {
 	$http.get('/cart/'+$rootScope.currentUser.username)
 	.success(function(response)
@@ -138,6 +171,7 @@ auth.checklogin = function() {
 app.controller('restcontrol',['$scope','$location','$http','$rootScope','$window',function($scope,$location,$http,$rootScope,$window){
 $scope.user={};
 $scope.payer={};
+$scope.reserve={};
 $scope.products=[];
 $scope.orders=[];
 $scope.er='';
@@ -181,6 +215,29 @@ $scope.logIn = function() {
         $location.path("/");
       });
   };
+
+$scope.tablereserve= function(){
+  	$http.post('/api/reservetable',$scope.reserve)
+  	.error(function(error) {
+			console.log('Error: ' + error);
+		})
+    .success(function(response) {
+    	$window.alert("Thanks for reserving table in our restaurant");
+        $location.path("/reservation");
+      });
+};
+
+$scope.tablecancel= function(){
+  	$http.post('/api/canceltable/'+$scope.codename)
+  	.error(function(error) {
+			console.log('Error: ' + error);
+		})
+    .success(function(response) {
+    	$window.alert("Cancelation of table in our restaurant is done.");
+        $location.path("/reservation");
+      });
+};
+
   $scope.checkout = function() {
     $http.post('/api/checkout/'+$rootScope.currentUser.username,$scope.payer)
     .error(function(error) {
@@ -191,6 +248,7 @@ $scope.logIn = function() {
         $window.location.href=response;
       });
   };
+
   $http.get('/api/products')
 		.success(function(data) {
 			$scope.products=data;
@@ -206,34 +264,7 @@ $scope.logIn = function() {
 		.error(function(data) {
 			console.log('Error: ' + data);
 		});
-	$scope.incrementitem = function(item)
-		 {
-			$scope.itm=({
-   		 itemname: item.title,
-   		 quantity: item.quantity,
- 		 });
-			$http.post('/api/itemquantinc', $scope.itm)
-		.success(function(data) {
-			$scope.posty= data;
-		})
-		.error(function(data) {
-			console.log('Error: ' + data);
-		});
-	}
-	$scope.decrementitem = function(item)
-		 {
-			$scope.itm=({
-   		 itemname: item.title,
-   		 quantity: item.quantity,
- 		 });
-			$http.post('/api/itemquantdec', $scope.itm)
-		.success(function(data) {
-			$scope.posty= data;
-		})
-		.error(function(data) {
-			console.log('Error: ' + data);
-		});
-	}
+
 	$scope.removeItem = function(itemid){
  		 $http.post('/api/removeItem/'+$rootScope.currentUser.username+'/'+itemid)
 		.success(function(data) {
@@ -248,6 +279,7 @@ $scope.logIn = function() {
 			console.log('Error: ' + data);
 		});
 	}
+
 	$scope.reduceItem = function(itemid){
  		 $http.post('/api/reduceItem/'+$rootScope.currentUser.username+'/'+itemid)
 		.success(function(data) {
@@ -262,6 +294,7 @@ $scope.logIn = function() {
 			console.log('Error: ' + data);
 		});
 	}
+
 	$scope.addtocart = function(item){
  		 $scope.it=({
  		 itemid:item._id,
@@ -274,4 +307,5 @@ $scope.logIn = function() {
 			console.log('Error: ' + data);
 		});
 	}
+
 }]);
