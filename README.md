@@ -14,7 +14,7 @@ MEAN stack website of restaurant franchise.Properties provided:- <br />
 - User Login & Register (used passportjs , express-session)
 - Food Ordering (maintaining cart-session)
 - Payment Option through Paypal Gateway (used paypal-rest-sdk)
-- Database Maintaned for Food-item,cart,user,order-list (using mongoose)
+- Database Maintaned for Food-item,cart,user,order-list,tables (using mongoose)
 
 # Home Page
 ![Home page](https://github.com/Pratyush-Ranjan/Restaurant-Booking/blob/master/hai.JPG)
